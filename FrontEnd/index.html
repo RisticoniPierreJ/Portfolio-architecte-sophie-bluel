@@ -9,7 +9,10 @@
 	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
 	<meta name="description" content="">
 	<link rel="stylesheet" href="./assets/style.css">
-    <script type="module" src="scripts/main.js"></script>
+
+	<!-- <script type="module" src="./scripts/main.js"></script> -->
+    <script src="scripts/main.js"></script>
+
 </head>
 <body>
 <header>
@@ -37,6 +40,12 @@
 	</section>
 	<section id="portfolio">
 		<h2>Mes Projets</h2>
+		<div class="filter">
+			<button class="filterBtn filterBtnSmall" onclick="filterProjectBtn('Tous')">Tous</button>
+			<button class="filterBtn filterBtnSmall" onclick="filterProjectBtn('Objets')">Objets</button>
+			<button class="filterBtn filterBtnLarge" onclick="filterProjectBtn('Appartements')">Appartements</button>
+			<button class="filterBtn filterBtnLarge" onclick="filterProjectBtn('Hôtels & restaurants')">Hôtels & restaurants</button>
+		</div>
 		<div class="gallery">
 		</div>
 	</section>

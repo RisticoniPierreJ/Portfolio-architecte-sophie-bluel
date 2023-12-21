@@ -123,8 +123,47 @@ li:hover {
 }
 #portfolio h2 {
 	text-align: center;
-	margin-bottom: 1em;
+	/* margin-bottom: 1em; */
+	margin-bottom: 50px;
+
 }
+
+.filter{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 10px;
+	padding: 0 0 50px 0 ;
+}
+
+.filterBtn{
+	background-color: transparent;
+	color: #1D6154;
+	border-radius: 60px;
+	border: 1px solid #1D6154;
+	font-family: Syne;
+	font-size: 16px;
+	cursor: pointer;
+}
+
+.filterBtnLarge{
+	padding: 10px 12px;
+}
+
+.filterBtnSmall{
+	padding: 10px 25px;
+}
+
+.active{
+	background-color: #1D6154;
+	color: #FFFFFF;
+	border-radius: 60px;
+	border: 1px solid #1D6154;
+	font-family: Syne;
+	font-size: 16px;
+	cursor: pointer;
+}
+
 .gallery {
 	width: 100%;
 	display: grid;
@@ -135,19 +174,22 @@ li:hover {
 
 .gallery img {
 	width: 100%;
-
 }
+
 #contact {
 	width: 50%;
 margin: auto;
 }
+
 #contact > * {
 	text-align: center;
 
 }
+
 #contact h2{
 	margin-bottom: 20px;
 }
+
 #contact form {
 	text-align: left;
 	margin-top:30px;
@@ -161,9 +203,11 @@ margin: auto;
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
+
 #contact label {
 	margin: 2em 0 1em 0;
 }
+
 #contact textarea {
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);

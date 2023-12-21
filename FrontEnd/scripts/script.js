@@ -28,3 +28,34 @@ export async function worksGeneration(){
         projectFigure.appendChild(descriptionProject);
     }
 }
+
+/**
+ * Cette fonction gère le changement de filtre
+ *
+*/
+export function filterProject(value){
+    let filterBtn = document.querySelectorAll(".filterBtn");
+    filterBtn.forEach(button => {
+        if(value.toUpperCase() == button.innerText.toUpperCase()){
+            button.classList.add("active");
+        }else{
+            button.classList.remove("active");
+        };
+    });
+};
+
+// Déclaration de filterProject dans le contexte global
+window.filterProject = filterProject;
+
+
+
+
+async function getWorksFromApi(){
+    const response = await fetch('http://localhost:5678/api/works');
+    let works = await response.json();
+    return works;
+}
+
+const projectList = getWorksFromApi();
+console.log(projectList);
+console.log(projectList[1].title);
