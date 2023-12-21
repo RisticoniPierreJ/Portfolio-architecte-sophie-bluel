@@ -86,19 +86,23 @@ window.onload = () => {
  */
 function filterPoject (works){
     const filterBtn = document.querySelectorAll(".filterBtn");
+
     for (let i = 0; i < filterBtn.length; i++) {
         filterBtn[i].addEventListener("click", function(){
-            const projectFilter = works.filter(function(works){
+            
+            let projectFilter = works.filter(function(works){
                 return works.categoryId === i;
             })
+
+            if (i === 0){
+                projectFilter = works;
+            } ;
+
             document.querySelector(".gallery").innerHTML = "";
             worksGeneration(projectFilter);
-            if (i === 0){
-                document.querySelector(".gallery").innerHTML = "";
-                worksGeneration(works);
-            } ;
-        });
-        
+
+            console.log(projectFilter);
+        });       
     };
 };
 

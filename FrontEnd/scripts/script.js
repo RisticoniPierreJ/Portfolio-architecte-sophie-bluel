@@ -47,9 +47,6 @@ export function filterProject(value){
 // Déclaration de filterProject dans le contexte global
 window.filterProject = filterProject;
 
-
-
-
 async function getWorksFromApi(){
     const response = await fetch('http://localhost:5678/api/works');
     let works = await response.json();
