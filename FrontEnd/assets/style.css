@@ -24,11 +24,6 @@ time, mark, audio, video {
 	vertical-align: baseline;
 }
 
-a{
-	text-decoration: none;
-	color: inherit;
-}
-
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
@@ -55,10 +50,11 @@ table {
 /** end reset css**/
 
 body {
-	/* ajout personnel pour maintenir le footer en bas de page 
+	/* Ajout personnel pour maintenir le footer en bas de page 
 	et baclground fidel à la maquette */
 	display: flex;
 	flex-direction: column;
+	align-items: center;
 	min-height: 100vh;
 	background-color: #FFFEF8;
 	/* Fin ajout personnel */
@@ -71,14 +67,22 @@ body {
 
 main{
 	flex-grow: 1;
+	width: 100%;
 }
+
 header {
 	display: flex;
 	justify-content: space-between;
-	margin: 50px 0
+	margin: 50px 0;
+	
+	/* Ajout personnel  */
+	width: 100%;
+	/* Fin ajout personnel */
+
 }
+
 section {
-	margin: 50px 0
+	margin: 50px 0;
 }
 
 h1{
@@ -95,10 +99,6 @@ h1 > span {
 	font-size:10px;
 	letter-spacing: 0.1em;
 
-}
-
-.title{
-	cursor: pointer;
 }
 
 h2{
@@ -123,9 +123,6 @@ li:hover {
 	cursor: pointer;
 }
 
-.onLoginPage{
-	font-weight: bold;
-}
 #introduction {
 	display: flex;
 	align-items: center;
@@ -153,43 +150,10 @@ li:hover {
 	text-align: center;
 	/* margin-bottom: 1em; */
 	margin-bottom: 50px;
-
 }
 
-.filter{
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	gap: 10px;
-	padding: 0 0 50px 0 ;
-}
-
-.filterBtn{
-	background-color: transparent;
-	color: #1D6154;
-	border-radius: 60px;
-	border: 1px solid #1D6154;
-	font-family: Syne;
-	font-size: 16px;
-	cursor: pointer;
-}
-
-.filterBtnLarge{
-	padding: 10px 12px;
-}
-
-.filterBtnSmall{
-	padding: 10px 25px;
-}
-
-.active{
-	background-color: #1D6154;
-	color: #FFFFFF;
-	border-radius: 60px;
-	border: 1px solid #1D6154;
-	font-family: Syne;
-	font-size: 16px;
-	cursor: pointer;
+#portfolio p{
+	margin-bottom: 50px;
 }
 
 .gallery {
@@ -224,7 +188,7 @@ li:hover {
 	flex-direction: column;
 }
 
-#contact input, #connexion input {
+#contact input, #connexion input, .modal input  {
 	/* ajout personnel pour mieux respecter les boutons de la maquette */
 	/* height: 50px; */
 	height: 36px;
@@ -264,10 +228,12 @@ input[type="submit"]{
 
 	/* ajout personnel pour mieux respecter les boutons de la maquette */
 	margin : 2.5em auto ;
-	/* margin : 2em auto ; */
+	cursor: pointer;
 	/* Fin ajout personnel */
-
-	width: 180px;
+	
+	/* margin : 2em auto ; */
+	width: 31.5%;
+	/* width: 180px; */
 	text-align: center;
 	border-radius: 60px ;
 	
@@ -276,5 +242,169 @@ input[type="submit"]{
 footer nav ul {
 	display: flex;
 	justify-content: flex-end;
-	margin: 2em
+	margin: 20px 28px;
 }
+
+/* Ajouts personnels */
+
+footer{
+	width: 100vw;
+	background-color: #FFFFFF;
+}
+
+/* Reset */
+a{
+	text-decoration: none;
+	color: inherit;
+}
+
+/* Titre section portfolio */
+.pojectTitle{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 30px;
+	padding-top: 90px;
+}
+
+.modifyProject{
+	display: flex;
+	gap: 10px;
+	cursor: pointer;
+}
+
+/* Barre de filtre */
+.filter{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 10px;
+	padding: 0 0 50px 0 ;
+}
+
+.filterBtn{
+	background-color: transparent;
+	color: #1D6154;
+	border-radius: 60px;
+	border: 1px solid #1D6154;
+	font-family: Syne;
+	font-size: 16px;
+	cursor: pointer;
+}
+
+.filterBtnLarge{
+	padding: 10px 12px;
+}
+
+.filterBtnSmall{
+	padding: 10px 25px;
+}
+
+.active{
+	background-color: #1D6154;
+	color: #FFFFFF;
+	border-radius: 60px;
+	border: 1px solid #1D6154;
+	font-family: Syne;
+	font-size: 16px;
+	cursor: pointer;
+}
+
+/* Top barre noire page d'édition */
+.adminTop{
+	/* width: 1440px; */
+	width: 100vw;
+	height: 59px;
+	display: none;
+	justify-content: center;
+	align-items: center;
+	gap: 11px;
+	background-color: #000000;
+	color: #FFFFFF;
+}
+
+/* Style pour la modale */
+.modalBackground{
+    display: flex;
+    /* display: none; */
+    position: fixed;
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(0, 0, 0, 0.35);
+}
+
+.modal{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width: 630px;
+	height: 688px;
+    padding: 26px 30px 45px 30px;
+    text-align: center;
+    background-color: #FFFFFF;
+    border-radius: 10px;
+    z-index: 1;
+}
+
+.modalTop{
+	display: flex;
+	justify-content: flex-end;
+}
+
+.modalTitle {
+	font-family: Work Sans;
+	font-size: 26px;
+	padding-top: 17px;
+}
+
+.modalGallery{
+	padding: 46px 75px 67px 75px;
+} 
+
+.modalGallery {
+	/* width: 100%; */
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+	grid-column-gap: 8px;
+	grid-row-gap: 24px;
+}
+
+.modalGallery img {
+	width: 100%;
+} 
+
+.separator{
+	border: 1px solid #B3B3B3;
+	margin: 0 75px;
+}
+
+.modal input[type="submit"]{
+	width: 37.5%;
+}
+
+/* Modification d'éléments page de login */
+.titleLoginPage{
+	cursor: pointer;
+}
+
+.onLoginPage{
+	font-weight: bold;
+}
+
+/* message d'erreur de login */
+.errorMessage{
+	display: none;
+	justify-content: center;
+	gap: 15px;
+	padding: 20px;
+	margin-top: 20px;
+	border: 3px dashed red;
+	color: red;
+	font-weight: bold;
+}
+
+/* Fin ajout personnel */
