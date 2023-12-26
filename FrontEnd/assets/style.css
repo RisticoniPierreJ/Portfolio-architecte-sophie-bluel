@@ -181,16 +181,15 @@ li:hover {
 	margin-bottom: 20px;
 }
 
-#contact form, #connexion form {
+#contact form, #connexion form, .secondModal form{
 	text-align: left;
 	margin-top:30px;
 	display: flex;
 	flex-direction: column;
 }
 
-#contact input, #connexion input, .modal input  {
+#contact input, #connexion input, .modal input, .secondModal select{
 	/* ajout personnel pour mieux respecter les boutons de la maquette */
-	/* height: 50px; */
 	height: 36px;
 	font-size: 0.875em;
 	/* Fin ajout personnel */
@@ -199,11 +198,11 @@ li:hover {
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
 
-#contact label, #connexion label {
+#contact label, #connexion label, .secondModal label {
 	margin: 2em 0 1em 0;
 }
 
-#contact textarea {
+#contact textarea{
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
@@ -236,7 +235,6 @@ input[type="submit"]{
 	/* width: 180px; */
 	text-align: center;
 	border-radius: 60px ;
-	
 }
 
 footer nav ul {
@@ -310,83 +308,7 @@ a{
 	cursor: pointer;
 }
 
-/* Top barre noire page d'édition */
-.adminTop{
-	/* width: 1440px; */
-	width: 100vw;
-	height: 59px;
-	display: none;
-	justify-content: center;
-	align-items: center;
-	gap: 11px;
-	background-color: #000000;
-	color: #FFFFFF;
-}
-
-/* Style pour la modale */
-.modalBackground{
-    display: flex;
-    /* display: none; */
-    position: fixed;
-    height: 100vh;
-    width: 100vw;
-    background-color: rgba(0, 0, 0, 0.35);
-}
-
-.modal{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    width: 630px;
-	height: 688px;
-    padding: 26px 30px 45px 30px;
-    text-align: center;
-    background-color: #FFFFFF;
-    border-radius: 10px;
-    z-index: 1;
-}
-
-.modalTop{
-	display: flex;
-	justify-content: flex-end;
-}
-
-.modalTitle {
-	font-family: Work Sans;
-	font-size: 26px;
-	padding-top: 17px;
-}
-
-.modalGallery{
-	padding: 46px 75px 67px 75px;
-} 
-
-.modalGallery {
-	/* width: 100%; */
-	display: grid;
-	grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-	grid-column-gap: 8px;
-	grid-row-gap: 24px;
-}
-
-.modalGallery img {
-	width: 100%;
-} 
-
-.separator{
-	border: 1px solid #B3B3B3;
-	margin: 0 75px;
-}
-
-.modal input[type="submit"]{
-	width: 37.5%;
-}
-
-/* Modification d'éléments page de login */
+/* Modification d'éléments sur la page de login */
 .titleLoginPage{
 	cursor: pointer;
 }
@@ -406,5 +328,155 @@ a{
 	color: red;
 	font-weight: bold;
 }
+
+/* Top barre noire page d'édition */
+.adminTop{
+	/* width: 1440px; */
+	width: 100vw;
+	height: 59px;
+	display: none;
+	justify-content: center;
+	align-items: center;
+	gap: 11px;
+	background-color: #000000;
+	color: #FFFFFF;
+}
+
+/* Style pour la modale */
+.modalBackground{
+    /* display: flex; */
+    display: none;
+    position: fixed;
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(0, 0, 0, 0.35);
+}
+
+.modal{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+	box-sizing: border-box;
+    width: 630px;
+	height: 670px;
+    padding: 26px 30px 45px 30px;
+    text-align: center;
+    background-color: #FFFFFF;
+    border-radius: 10px;
+    z-index: 1;
+}
+
+.modalTop{
+	display: flex;
+	justify-content: flex-end;
+}
+
+.modalTop i{
+	cursor: pointer;
+}
+
+.modalArrowIcon{
+	display: none;
+}
+
+.modalTitle {
+	font-family: Work Sans;
+	font-size: 26px;
+	padding-top: 17px;
+}
+
+.modalGallery{
+	padding: 46px 75px 67px 75px;
+} 
+
+.modalGallery {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+	grid-column-gap: 8px;
+	grid-row-gap: 24px;
+}
+
+.modalGallery img {
+	width: 100%;
+} 
+
+.firstModal{
+	display: block;
+}
+
+.secondModal{
+	display: none;
+}
+
+.modalform{
+	padding: 36px 75px 47px 75px;
+}
+
+.addPhotoBox{
+	background-color: #E8F1F6;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 20px 0;
+	gap: 7px;
+}
+
+.addPhotoBox i{
+	color: #B9C5CC;
+	font-size: 5.5em;
+	padding-bottom: 7px;
+}
+
+.addPhotoBox label{
+	margin: 0;
+	width: 173px;
+	height: 36px;
+	font-size: 0.875em;
+	border-radius: 50px;
+	color: #306685;
+	background-color: #CBD6DC;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.addPhotoBox input[type=file]{
+	display: none;
+}
+
+.addPhotoBox p {
+	color: #444;
+	font-size: 10px;
+}
+
+.secondModal form{
+	margin-top:0;
+}
+
+.modal input, .secondModal select{
+	box-sizing: border-box;
+	height: 51px;
+}
+
+.separator{
+	border: 1px solid #B3B3B3;
+	margin: 0 75px;
+}
+
+.modal input[type="submit"]{
+	height: 36px;
+	width: 43.7%;
+}
+
+#validate{
+	background-color: #A7A7A7;
+	color: #FFFFFF;
+}
+
 
 /* Fin ajout personnel */

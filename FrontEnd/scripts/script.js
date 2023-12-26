@@ -94,14 +94,6 @@ form.addEventListener("submit", async (event) => {
         return response.json();
     }
 
-    try {
-        const responseData = await login(userCredentials);
-        handleLoginResponse(responseData);
-    } catch (error) {
-        console.error("Erreur lors de la requête :", error);
-    }
-
-
     function handleLoginResponse(responseData) {
         if (responseData.token) {
             // Stocke le token dans le stockage local (localStorage)
@@ -117,6 +109,15 @@ form.addEventListener("submit", async (event) => {
             console.error('Le token n\'est pas présent dans la réponse de connexion.');
         }
     }
+    
+    try {
+        const responseData = await login(userCredentials);
+        handleLoginResponse(responseData);
+    } catch (error) {
+        console.error("Erreur lors de la requête :", error);
+    }
+
+
 });
 
 // /**

@@ -229,7 +229,6 @@ function handleLogout(){
  * Cette partie concerne  l'affichage et à la fermeture de la modale. 
  * 
  *********************************************************************************/
-
 /**
  * Cette fonction affiche la modale  
  */
@@ -262,7 +261,14 @@ function initAddEventListenermodal() {
         if (event.target === modalBackground) {
             // Alors on cache la popup
             hideModal();
+            displayFirstModal();
         }
+    })
+
+    let modalCrossIcon = document.querySelector(".modalCrossIcon");
+    modalCrossIcon.addEventListener("click", () => {
+        hideModal();
+        displayFirstModal();
     })
 }
 
@@ -293,6 +299,34 @@ function worksGenerationModal(works) {
 
 fetchWorks().then(works => {
     worksGenerationModal(works);
+});
+
+let modalTop  = document.querySelector(".modalTop");
+let modalArrowIcon  = document.querySelector(".modalArrowIcon");
+let firstModal = document.querySelector(".firstModal");
+let secondModal = document.querySelector(".secondModal");
+
+function displayFirstModal(){
+    firstModal.style.display = "block";
+    secondModal.style.display = "none";
+    modalArrowIcon.style.display = "none";
+    modalTop.style.justifyContent = "flex-end";
+}
+
+function displaySecondModal(){
+    firstModal.style.display = "none";
+    secondModal.style.display = "block";
+    modalArrowIcon.style.display = "block";
+    modalTop.style.justifyContent = "space-between";
+}
+
+modalArrowIcon.addEventListener("click", () => {
+    displayFirstModal();
+});
+
+let addPhotoBtn = document.querySelector(".firstModal input");
+addPhotoBtn.addEventListener("click", () => {
+    displaySecondModal()
 });
 
 
