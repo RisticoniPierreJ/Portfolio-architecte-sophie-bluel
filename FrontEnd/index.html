@@ -19,15 +19,15 @@
 	
 	<div class="adminTop">
 		<i class="fa-regular fa-pen-to-square"></i>
-        <p></i>Mode édition</p>
+        <p>Mode édition</p>
 	</div>
 	<header>
 		<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
 		<nav>
 			<ul>
-				<a href="#projectAnchor"><li>projets</li></a>
-				<a href="#contactAnchor"><li>contact</li></a>
-				<a><li class="loginBtn">login</li></a>
+				<li><a href="#projectAnchor">projets</a></li>
+				<li><a href="#contactAnchor">contact</a></li>
+				<li class="loginBtn"><a>login</a></li>
 				<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
 			</ul>
 		</nav>
@@ -82,14 +82,14 @@
 	<div class="modalBackground">
 		<div class="modal">
 			<div class="modalTop">
-				<i class="fa-solid fa-arrow-left fa-lg modalArrowIcon"></i>
-				<i class="fa-solid fa-xmark fa-lg modalCrossIcon"></i>
+				<i class="fa-solid fa-arrow-left fa-lg" id="modalArrowIcon"></i>
+				<i class="fa-solid fa-xmark fa-lg" id="modalCrossIcon"></i>
 			</div>
 
 			<div class="firstModal">
 				<p class="modalTitle">Galerie photo</p>
 				<div class="modalGallery">
-		
+						
 				</div>	
 				<p class="separator"></p>
 				<input type="submit" value="Ajouter une photo">		
@@ -98,26 +98,21 @@
 			<div class="secondModal">
 				<p class="modalTitle">Ajout photo</p>
 				<div class="modalform">
-					<div class="addPhotoBox">
-						<i class="fa-regular fa-image "></i>
-						<!-- <input type="file" accept=".jpg, .png" > -->
-						<label for="image_uploads">+ Ajouter photo</label>
-						<input
-      						type="file"
-      						id="image_uploads"
-      						name="image_uploads"
-      						accept=".jpg, .jpeg, .png"/>
-						<p>jpg, png : 4mo max</p>
-					</div>
-					<form action="">
+					<form>
+						<div class="addPhotoBox">
+							<i class="fa-regular fa-image "></i>
+							<label for="image_uploads">+ Ajouter photo</label>
+							<input type="file" id="image_uploads" name="image_uploads" accept=".jpg, .jpeg, .png" required/>
+							<p>jpg, png : 4mo max</p>
+						</div>
 						<label for="name">Titre</label>
-						<input type="text" name="name" id="name" autocomplete="off">
+						<input type="text" name="title" id="title" autocomplete="off" required>
 						<label for="categories">Catégorie</label>
-						<select name="" name="categories" id="categories"></select>
+						<select name="categories" id="categories" required></select>
+						<p class="separator"></p>
+						<input type="submit" name="validate" id="validate" value="Valider" class="validateBtn">		
 					</form>
 				</div>
-				<p class="separator"></p>
-				<input type="submit" name="validate" id="validate" value="Valider" class="validateBtn">		
 			</div>
 		</div>
 	</div>

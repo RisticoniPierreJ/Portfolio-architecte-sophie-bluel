@@ -108,7 +108,7 @@ function handleFilterBtn(categories) {
     };
 
     // Gestion du changement d'aspect d'un bouton filtre au clic
-    let filterBtn = document.querySelectorAll(".filterBtn");
+    const filterBtn = document.querySelectorAll(".filterBtn");
     for (let i = 0; i < filterBtn.length; i++) {
         filterBtn[i].addEventListener("click", () => {
 
@@ -122,7 +122,6 @@ function handleFilterBtn(categories) {
     }
 
 };
-
 fetchCategories().then(categories => {
     handleFilterBtn(categories);
 });
@@ -149,7 +148,6 @@ function filterProject (works){
         });       
     };
 };
-
 fetchWorks().then(works => {
     filterProject(works);
 });
@@ -233,14 +231,14 @@ function handleLogout(){
  * Cette fonction affiche la modale  
  */
 function displayModal() {
-    let modalBackground = document.querySelector(".modalBackground").style.display = "block";
+    const modalBackground = document.querySelector(".modalBackground").style.display = "block";
 }
 
 /**
  * Cette fonction cache la modale 
  */
 function hideModal() {
-    let modalBackground = document.querySelector(".modalBackground").style.display = "none";
+    const modalBackground = document.querySelector(".modalBackground").style.display = "none";
 }
 
 /**
@@ -249,7 +247,7 @@ function hideModal() {
  */
 function initAddEventListenermodal() {
     const modifyBtn = document.querySelector(".modifyProject");
-    let modalBackground = document.querySelector(".modalBackground")
+    const modalBackground = document.querySelector(".modalBackground")
     modifyBtn.addEventListener("click", () => {
         // Quand on a cliqué sur le bouton partagé, on affiche la popup
         displayModal();
@@ -265,7 +263,7 @@ function initAddEventListenermodal() {
         }
     })
 
-    let modalCrossIcon = document.querySelector(".modalCrossIcon");
+    const modalCrossIcon = document.querySelector("#modalCrossIcon");
     modalCrossIcon.addEventListener("click", () => {
         hideModal();
         displayFirstModal();
@@ -296,18 +294,20 @@ function worksGenerationModal(works) {
 
     };
 };
-
 fetchWorks().then(works => {
     worksGenerationModal(works);
 });
 
-let modalTop  = document.querySelector(".modalTop");
-let modalArrowIcon  = document.querySelector(".modalArrowIcon");
-let firstModal = document.querySelector(".firstModal");
-let secondModal = document.querySelector(".secondModal");
+/**
+ * Gestion du changement d'apparence de la modale
+**/
+const modalTop  = document.querySelector(".modalTop");
+const modalArrowIcon  = document.querySelector("#modalArrowIcon");
+const firstModal = document.querySelector(".firstModal");
+const secondModal = document.querySelector(".secondModal");
 
 function displayFirstModal(){
-    firstModal.style.display = "block";
+    firstModal.style.display = "flex";
     secondModal.style.display = "none";
     modalArrowIcon.style.display = "none";
     modalTop.style.justifyContent = "flex-end";
@@ -324,11 +324,80 @@ modalArrowIcon.addEventListener("click", () => {
     displayFirstModal();
 });
 
-let addPhotoBtn = document.querySelector(".firstModal input");
+const addPhotoBtn = document.querySelector(".firstModal input");
 addPhotoBtn.addEventListener("click", () => {
-    displaySecondModal()
+    displaySecondModal();		
 });
 
+/*********************************************************************************
+ * 
+ * Cette partie concerne la création d'un nouveau projet. 
+ * 
+ *********************************************************************************/
+/**
+ * Cette fonction place les catégories dans l'input select
+ * @param {Array} categories - Les projets à afficher
+ */
+function categoriesSelection(categories){
+    // Récupération de l'input select
+    const inputSelect = document.querySelector("#categories");
+
+    // Création des options
+    for (let i = 0; i < categories.length; i++) {
+        const selectOption = document.createElement("option");
+        selectOption.value = categories[i].name;
+        selectOption.innerText = categories[i].name;
+        inputSelect.appendChild(selectOption);
+    };
+}
+fetchCategories().then(categories => {
+    categoriesSelection(categories);
+});
+
+// Gestion de l'input select 
+const input = document.querySelector(".addPhotoBox input");
+input.addEventListener("change", updateImageDisplay);
+
+/**
+ * Cette fonction gère la preview de l'image à la création d'un projet
+ * 
+*/
+function updateImageDisplay() {
+    const preview = document.querySelector(".addPhotoBox");
+    while (preview.firstChild) {
+      preview.removeChild(preview.firstChild);
+    }
+  
+    const curFiles = input.files;
+    console.log(curFiles);
+    
+    for (const file of curFiles) {
+        if (validFileType(file)) {
+            const image = document.createElement("img");
+            image.src = URL.createObjectURL(file);
+            image.alt = image.title = file.name;
+            preview.appendChild(image);
+        } else {
+            const para = document.createElement("p");
+            para.textContent = `Ce type de fichier n'est pas valide.`;
+            preview.appendChild(para);
+        }      
+    }    
+}
+
+/**
+ * Cette fonction vérifie le type du fichier choisit
+ * 
+ */
+// https://developer.mozilla.org/en-US/docs/Web/Media/Formats/Image_types
+const fileTypes = [
+    "image/jpeg",
+    "image/png",
+  ];
+  
+function validFileType(curFiles) {
+    return fileTypes.includes(curFiles.type);
+}
 
 // /**
 //  * Sans modules

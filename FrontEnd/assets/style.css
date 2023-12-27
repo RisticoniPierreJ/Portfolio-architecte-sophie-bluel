@@ -379,7 +379,7 @@ a{
 	cursor: pointer;
 }
 
-.modalArrowIcon{
+#modalArrowIcon{
 	display: none;
 }
 
@@ -405,7 +405,10 @@ a{
 } 
 
 .firstModal{
-	display: block;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
 }
 
 .secondModal{
@@ -413,7 +416,7 @@ a{
 }
 
 .modalform{
-	padding: 36px 75px 47px 75px;
+	padding: 36px 75px 0 75px;
 }
 
 .addPhotoBox{
@@ -421,14 +424,16 @@ a{
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	padding: 20px 0;
+	/* padding: 20px 0; */
 	gap: 7px;
 }
 
 .addPhotoBox i{
 	color: #B9C5CC;
 	font-size: 5.5em;
-	padding-bottom: 7px;
+	/* padding-bottom: 7px; */
+	padding: 20px 0 7px 0;
+
 }
 
 .addPhotoBox label{
@@ -452,6 +457,12 @@ a{
 .addPhotoBox p {
 	color: #444;
 	font-size: 10px;
+	padding-bottom: 20px ;
+}
+
+.addPhotoBox img{
+	width: 129px;
+	height: 169px;
 }
 
 .secondModal form{
@@ -465,15 +476,24 @@ a{
 
 .separator{
 	border: 1px solid #B3B3B3;
-	margin: 0 75px;
+	width: 420px;
+	/* padding-top: 46px; */
+	/* margin: 0 75px; */
 }
+
+
 
 .modal input[type="submit"]{
 	height: 36px;
-	width: 43.7%;
+	width: 41.7%;
+}
+
+#categories{
+	margin-bottom: 47px;
 }
 
 #validate{
+	width: 56.5%;
 	background-color: #A7A7A7;
 	color: #FFFFFF;
 }
