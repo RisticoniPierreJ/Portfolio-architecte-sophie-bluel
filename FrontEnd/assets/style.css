@@ -243,7 +243,9 @@ footer nav ul {
 	margin: 20px 28px;
 }
 
-/* Ajouts personnels */
+/******************************************/
+/*********** Ajouts personnels ************/
+/******************************************/
 
 footer{
 	width: 100vw;
@@ -391,9 +393,9 @@ a{
 
 .modalGallery{
 	padding: 46px 75px 67px 75px;
-} 
+	overflow: auto;
+	height: 370px;
 
-.modalGallery {
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
 	grid-column-gap: 8px;
@@ -403,6 +405,17 @@ a{
 .modalGallery img {
 	width: 100%;
 } 
+
+.modalGallery figure{
+	position: relative;
+}
+
+.modalGallery .trashcanIcon{
+	position: absolute;
+	top: 0.3em;
+    right: 0.2em;
+	cursor: pointer;
+}
 
 .firstModal{
 	display: flex;
@@ -424,16 +437,13 @@ a{
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	/* padding: 20px 0; */
-	gap: 7px;
+	height: 169px;
 }
 
 .addPhotoBox i{
 	color: #B9C5CC;
-	font-size: 5.5em;
-	/* padding-bottom: 7px; */
-	padding: 20px 0 7px 0;
-
+	font-size: 5.3em;
+	padding: 17px 0 9px 0;
 }
 
 .addPhotoBox label{
@@ -457,12 +467,13 @@ a{
 .addPhotoBox p {
 	color: #444;
 	font-size: 10px;
-	padding-bottom: 20px ;
+	padding: 7px 0 15px 0;
 }
 
 .addPhotoBox img{
 	width: 129px;
 	height: 169px;
+	cursor: pointer;
 }
 
 .secondModal form{
@@ -474,14 +485,14 @@ a{
 	height: 51px;
 }
 
+.secondModal option[value=""]{
+	display: none;
+}
+
 .separator{
 	border: 1px solid #B3B3B3;
 	width: 420px;
-	/* padding-top: 46px; */
-	/* margin: 0 75px; */
 }
-
-
 
 .modal input[type="submit"]{
 	height: 36px;

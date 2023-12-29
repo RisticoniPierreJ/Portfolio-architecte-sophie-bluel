@@ -13,6 +13,7 @@
 
 	<!-- <script type="module" src="./scripts/main.js"></script> -->
     <script src="scripts/main.js" defer></script>
+    <script src="scripts/modal.js" defer></script>
 
 </head>
 <body>
@@ -52,6 +53,7 @@
 				
 			</div>
 			<div class="gallery">
+
 			</div>
 		</section>
 		<section id="contact">
@@ -89,7 +91,7 @@
 			<div class="firstModal">
 				<p class="modalTitle">Galerie photo</p>
 				<div class="modalGallery">
-						
+
 				</div>	
 				<p class="separator"></p>
 				<input type="submit" value="Ajouter une photo">		
@@ -98,7 +100,7 @@
 			<div class="secondModal">
 				<p class="modalTitle">Ajout photo</p>
 				<div class="modalform">
-					<form>
+					<form id="projectCreationForm">
 						<div class="addPhotoBox">
 							<i class="fa-regular fa-image "></i>
 							<label for="image_uploads">+ Ajouter photo</label>
@@ -108,7 +110,9 @@
 						<label for="name">Titre</label>
 						<input type="text" name="title" id="title" autocomplete="off" required>
 						<label for="categories">Catégorie</label>
-						<select name="categories" id="categories" required></select>
+						<select name="categories" id="categories" required>
+							<option value=""></option>
+						</select>
 						<p class="separator"></p>
 						<input type="submit" name="validate" id="validate" value="Valider" class="validateBtn">		
 					</form>

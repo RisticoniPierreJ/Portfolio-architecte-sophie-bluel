@@ -1,28 +1,8 @@
-// /**
-//  * Avec modules
-// */
-
-// import { worksGeneration, filterProject } from "./script.js";
-
-// worksGeneration();
-
-// let value = "Tous";
-// filterProject(value);
-
-// /**
-//  * Avec modules
-// */
-
-
-// /**
-//  * Sans modules
-// */
-
 //Gestion du clic sur le bouton envoyer
-const form = document.querySelector("form");
-form.addEventListener("submit", (event) => {
-    event.preventDefault();
-})
+// const form = document.querySelector("form");
+// form.addEventListener("submit", (event) => {
+//     event.preventDefault();
+// })
 
 /**
  * Cette fonction récupère les projets depuis l'API
@@ -32,6 +12,7 @@ async function fetchWorks() {
     const response = await fetch('http://localhost:5678/api/works');
     const works = await response.json();
     return works;
+    
 }
 
 /**
@@ -204,11 +185,11 @@ function updatePageForLoggedInUser() {
         </div>
     `;
 
-    // Ajout de la Top bar noire 
-    const adminBlackTop = document.querySelector(".adminTop").style.display = "flex";
+     // Ajout de la Top bar noire 
+     const adminBlackTop = document.querySelector(".adminTop").style.display = "flex";
 
-    // Suppression de la filter bar 
-    const filterBar = document.querySelector(".filter").style.display = "none";
+     // Suppression de la filter bar 
+     const filterBar = document.querySelector(".filter").style.display = "none";
 }
 
 /**
@@ -219,186 +200,3 @@ function handleLogout(){
     localStorage.setItem('isLoggedIn', 'false');
     window.location.href = 'index.html';
 }
-
-
-
-/*********************************************************************************
- * 
- * Cette partie concerne  l'affichage et à la fermeture de la modale. 
- * 
- *********************************************************************************/
-/**
- * Cette fonction affiche la modale  
- */
-function displayModal() {
-    const modalBackground = document.querySelector(".modalBackground").style.display = "block";
-}
-
-/**
- * Cette fonction cache la modale 
- */
-function hideModal() {
-    const modalBackground = document.querySelector(".modalBackground").style.display = "none";
-}
-
-/**
- * Cette fonction initialise les écouteurs d'événements qui concernent 
- * l'affichage de la modale. 
- */
-function initAddEventListenermodal() {
-    const modifyBtn = document.querySelector(".modifyProject");
-    const modalBackground = document.querySelector(".modalBackground")
-    modifyBtn.addEventListener("click", () => {
-        // Quand on a cliqué sur le bouton partagé, on affiche la popup
-        displayModal();
-    })
-
-    modalBackground.addEventListener("click", (event) => {
-        // Si on a cliqué précisément sur la modalBackground 
-        // (et pas un autre élément qui se trouve dedant)
-        if (event.target === modalBackground) {
-            // Alors on cache la popup
-            hideModal();
-            displayFirstModal();
-        }
-    })
-
-    const modalCrossIcon = document.querySelector("#modalCrossIcon");
-    modalCrossIcon.addEventListener("click", () => {
-        hideModal();
-        displayFirstModal();
-    })
-}
-
-/**
- * Cette fonction génère les projets dans la modale à partir des données de l'API
- * @param {Array} works - Les projets à afficher
- */
-function worksGenerationModal(works) {
-    for (let i = 0; i < works.length; i++) {
-        const project = works[i];
-
-        // Récupération de l'élément de la modale qui accueillera les fiches projet
-        const modalGallery = document.querySelector(".modalGallery");
-
-        // Création d’une balise dédiée à une fiche projet
-        const projectFigure = document.createElement("figure");
-        projectFigure.dataset.id = project.id;
-        modalGallery.appendChild(projectFigure);
-
-        // Création des balises contenues dans la balise figure
-        const imageProject = document.createElement("img");
-        imageProject.src = project.imageUrl;
-        imageProject.alt = project.title;
-        projectFigure.appendChild(imageProject);
-
-    };
-};
-fetchWorks().then(works => {
-    worksGenerationModal(works);
-});
-
-/**
- * Gestion du changement d'apparence de la modale
-**/
-const modalTop  = document.querySelector(".modalTop");
-const modalArrowIcon  = document.querySelector("#modalArrowIcon");
-const firstModal = document.querySelector(".firstModal");
-const secondModal = document.querySelector(".secondModal");
-
-function displayFirstModal(){
-    firstModal.style.display = "flex";
-    secondModal.style.display = "none";
-    modalArrowIcon.style.display = "none";
-    modalTop.style.justifyContent = "flex-end";
-}
-
-function displaySecondModal(){
-    firstModal.style.display = "none";
-    secondModal.style.display = "block";
-    modalArrowIcon.style.display = "block";
-    modalTop.style.justifyContent = "space-between";
-}
-
-modalArrowIcon.addEventListener("click", () => {
-    displayFirstModal();
-});
-
-const addPhotoBtn = document.querySelector(".firstModal input");
-addPhotoBtn.addEventListener("click", () => {
-    displaySecondModal();		
-});
-
-/*********************************************************************************
- * 
- * Cette partie concerne la création d'un nouveau projet. 
- * 
- *********************************************************************************/
-/**
- * Cette fonction place les catégories dans l'input select
- * @param {Array} categories - Les projets à afficher
- */
-function categoriesSelection(categories){
-    // Récupération de l'input select
-    const inputSelect = document.querySelector("#categories");
-
-    // Création des options
-    for (let i = 0; i < categories.length; i++) {
-        const selectOption = document.createElement("option");
-        selectOption.value = categories[i].name;
-        selectOption.innerText = categories[i].name;
-        inputSelect.appendChild(selectOption);
-    };
-}
-fetchCategories().then(categories => {
-    categoriesSelection(categories);
-});
-
-// Gestion de l'input select 
-const input = document.querySelector(".addPhotoBox input");
-input.addEventListener("change", updateImageDisplay);
-
-/**
- * Cette fonction gère la preview de l'image à la création d'un projet
- * 
-*/
-function updateImageDisplay() {
-    const preview = document.querySelector(".addPhotoBox");
-    while (preview.firstChild) {
-      preview.removeChild(preview.firstChild);
-    }
-  
-    const curFiles = input.files;
-    console.log(curFiles);
-    
-    for (const file of curFiles) {
-        if (validFileType(file)) {
-            const image = document.createElement("img");
-            image.src = URL.createObjectURL(file);
-            image.alt = image.title = file.name;
-            preview.appendChild(image);
-        } else {
-            const para = document.createElement("p");
-            para.textContent = `Ce type de fichier n'est pas valide.`;
-            preview.appendChild(para);
-        }      
-    }    
-}
-
-/**
- * Cette fonction vérifie le type du fichier choisit
- * 
- */
-// https://developer.mozilla.org/en-US/docs/Web/Media/Formats/Image_types
-const fileTypes = [
-    "image/jpeg",
-    "image/png",
-  ];
-  
-function validFileType(curFiles) {
-    return fileTypes.includes(curFiles.type);
-}
-
-// /**
-//  * Sans modules
-// */
