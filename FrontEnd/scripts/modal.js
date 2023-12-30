@@ -17,12 +17,10 @@ function hideModal() {
     const modalBackground = document.querySelector(".modalBackground").style.display = "none";
     resetForm();
     displayFirstModal();
-
 }
-
+    
 /**
- * Cette fonction initialise les écouteurs d'événements qui concernent 
- * l'affichage de la modale. 
+ * Cette fonction initialise les écouteurs d'événements qui concernent l'affichage de la modale.
  */
 function initAddEventListenermodal() {
     const modifyBtn = document.querySelector(".modifyProject");
@@ -38,14 +36,12 @@ function initAddEventListenermodal() {
         if (event.target === modalBackground) {
             // Alors on cache la popup
             hideModal();
-            // displayFirstModal();
         }
     })
 
     const modalCrossIcon = document.querySelector("#modalCrossIcon");
     modalCrossIcon.addEventListener("click", () => {
         hideModal();
-        // displayFirstModal();
     })
 }
 
@@ -74,7 +70,6 @@ function worksGenerationModal(works) {
         // Création de l'icone poubelle
         const trashcanIconSpan = document.createElement("span");
         trashcanIconSpan.setAttribute("class","fa-stack fa-xs trashcanIcon");
-        // trashcanIconSpan.setAttribute("id","trashcanIcon");
         projectFigure.appendChild(trashcanIconSpan);
         trashcanIconSpan.dataset.id = project.id;
 
@@ -135,25 +130,23 @@ addPhotoBtn.addEventListener("click", () => {
  *********************************************************************************/
 /**
  * Cette fonction gère l'ajout de l'image à la création d'un projet
- * 
 */
 function updateImageDisplay() {
-    const preview = document.querySelector(".addPhotoBox");
+    const preview = document.querySelector(".photoPreview");
+
     while (preview.firstChild) {
       preview.removeChild(preview.firstChild);
     }
-    preview.innerHTML=``;
-  
+
     const curFiles = input.files;
-    console.log(curFiles);
-    
     for (const file of curFiles) {
         if (validFileType(file)) {
             const image = document.createElement("img");
             image.src = URL.createObjectURL(file);
             image.alt = image.title = file.name;
             preview.appendChild(image);
-
+            const photoPreview = document.querySelector(".photoPreview").style.display="block";
+            const photoInputFile = document.querySelector(".photoInputFile").style.display="none";
         } else {
             const para = document.createElement("p");
             para.textContent = `Ce type de fichier n'est pas valide.`;
@@ -162,9 +155,11 @@ function updateImageDisplay() {
     }    
 }
 
+const input = document.querySelector(".addPhotoBox input");
+input.addEventListener("change", updateImageDisplay);
+
 /**
  * Cette fonction vérifie le type du fichier choisit
- * 
  */
 // https://developer.mozilla.org/en-US/docs/Web/Media/Formats/Image_types
 const fileTypes = [
@@ -175,12 +170,6 @@ const fileTypes = [
 function validFileType(curFiles) {
     return fileTypes.includes(curFiles.type);
 }
-
-/**
- * Gestion de l'ajout de la photo du projet avec l'input File 
- */
-const input = document.querySelector(".addPhotoBox input");
-input.addEventListener("change", updateImageDisplay);
 
 /**
  * Cette fonction place les catégories comme options dans l'input select
@@ -203,9 +192,11 @@ fetchCategories().then(categories => {
     categoriesSelection(categories);
 });
 
+
 /**
  * Gestion du changement d'aspect du bouton valider
- */
+*/
+
 // Sélection des champs du formulaire
 const imageInput = document.querySelector("#image_uploads");
 const titleInput = document.querySelector("#title");
@@ -221,7 +212,6 @@ categoriesInput.addEventListener("change", checkFormFields);
 
 /**
  * Cette fonction vérifie l'état des champs et met à jour le bouton
- * 
  */
 function checkFormFields() {
     const imageValue = imageInput.value;
@@ -239,36 +229,29 @@ function checkFormFields() {
  * Cette fonction réinitialise le formulaire dans la modale
  */
 function resetForm() {
-
     // Réinitialise le champ de fichier (input de type "file")
-    const preview = document.querySelector(".addPhotoBox");
-    preview.innerHTML = `
-    <i class="fa-regular fa-image "></i>
-    <label for="image_uploads">+ Ajouter photo</label>
-    <input type="file" id="image_uploads" name="image_uploads" accept=".jpg, .jpeg, .png" required/>
-    <p>jpg, png : 4mo max</p>`;
+    input.value="";
+    const photoInputFile = document.querySelector(".photoInputFile").style.display="flex";
+    const photoPreview = document.querySelector(".photoPreview").style.display="none";
 
-    
     // Réinitialise la valeur des champs texte et select
     titleInput.value = "";
     categoriesInput.value = "";
-    
+
     // Réinitialise la couleur du bouton Valider
-    const validateBtn = document.querySelector("#validate");
     validateBtn.style.backgroundColor = "#A7A7A7";
 }
-
-
 
 /*********************************************************************************
  * 
  * Cette partie concerne la création d'un nouveau projet. 
  * 
  *********************************************************************************/
-const form = document.querySelector(".modalform form");
-form.addEventListener("submit", async(event) => {
-    event.preventDefault();
 
+/**
+ * Cette fonction gère la création d'un projet
+ */
+async function handleCreateProject(){
     const newProjectData = new FormData();
     newProjectData.append("image", input.files[0], input.files[0].name);
     newProjectData.append("title", event.target.querySelector("[name=title]").value);
@@ -291,7 +274,6 @@ form.addEventListener("submit", async(event) => {
 
             // Mise à jour de l'affichage
             hideModal();
-            displayFirstModal();
 
             const projectsGallery = document.querySelector(".gallery");
             projectsGallery.innerHTML = "";
@@ -308,13 +290,17 @@ form.addEventListener("submit", async(event) => {
     } catch (error) {
         console.error("Erreur lors de la requête :", error);
     }
+}
+
+const form = document.querySelector(".modalform form");
+form.addEventListener("submit", async(event) => {
+    event.preventDefault();
+    handleCreateProject();
 });
 
-/*********************************************************************************
- * 
- * Cette partie concerne la suppression d'un projet. 
- * 
- *********************************************************************************/
+/**
+ * Cette fonction gère la suppression d'un projet
+ */
 async function handleDeleteProject(projectId) {
     const token = localStorage.getItem('userToken');
 

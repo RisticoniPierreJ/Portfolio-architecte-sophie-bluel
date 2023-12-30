@@ -432,7 +432,7 @@ a{
 	padding: 36px 75px 0 75px;
 }
 
-.addPhotoBox{
+.addPhotoBox, .photoInputFile{
 	background-color: #E8F1F6;
 	display: flex;
 	flex-direction: column;
