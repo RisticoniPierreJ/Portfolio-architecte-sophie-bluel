@@ -258,7 +258,8 @@ a{
 	color: inherit;
 }
 
-/* Titre section portfolio */
+/*******************************************/
+/*********** section portfolio ************/
 .pojectTitle{
 	display: flex;
 	justify-content: center;
@@ -267,13 +268,13 @@ a{
 	padding-top: 90px;
 }
 
-.modifyProject{
-	display: flex;
-	gap: 10px;
-	cursor: pointer;
+.gallery figcaption{
+	padding-top: 7px;
 }
 
-/* Barre de filtre */
+
+/*****************************************/
+/*********** Barre de filtre ************/
 .filter{
 	display: flex;
 	justify-content: center;
@@ -310,7 +311,8 @@ a{
 	cursor: pointer;
 }
 
-/* Modification d'éléments sur la page de login */
+/**********************************************************************/
+/*********** Modification d'éléments sur la page de login ************/
 .titleLoginPage{
 	cursor: pointer;
 }
@@ -331,6 +333,9 @@ a{
 	font-weight: bold;
 }
 
+/*******************************************************************************/
+/*********** Modification d'éléments sur la page d'acceuil d'admin ************/
+
 /* Top barre noire page d'édition */
 .adminTop{
 	/* width: 1440px; */
@@ -344,7 +349,15 @@ a{
 	color: #FFFFFF;
 }
 
-/* Style pour la modale */
+/* Bouton modifier */
+.modifyProject{
+	display: flex;
+	gap: 10px;
+	cursor: pointer;
+}
+
+/**********************************************/
+/*********** Style pour la modale ************/
 .modalBackground{
     /* display: flex; */
     display: none;

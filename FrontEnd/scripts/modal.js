@@ -85,7 +85,6 @@ function worksGenerationModal(works) {
             const projectId = project.id;
             handleDeleteProject(projectId);
         });
-
     };
 };
 fetchWorks().then(works => {
@@ -244,7 +243,7 @@ function resetForm() {
 
 /*********************************************************************************
  * 
- * Cette partie concerne la création d'un nouveau projet. 
+ * Cette partie concerne la création et la suppression de projet. 
  * 
  *********************************************************************************/
 
@@ -274,18 +273,7 @@ async function handleCreateProject(){
 
             // Mise à jour de l'affichage
             hideModal();
-
-            const projectsGallery = document.querySelector(".gallery");
-            projectsGallery.innerHTML = "";
-            fetchWorks().then(works => {
-                worksGeneration(works);
-            });
-
-            const modalGallery = document.querySelector(".modalGallery");
-            modalGallery.innerHTML = "";
-            fetchWorks().then(works => {
-                worksGenerationModal(works);
-            });
+            updateGalleries();
         }
     } catch (error) {
         console.error("Erreur lors de la requête :", error);
@@ -315,21 +303,29 @@ async function handleDeleteProject(projectId) {
         } else {
             console.log("Projet supprimé avec succès");
 
-            // Mise à jour de l'affichage dans la modale
-            const modalGallery = document.querySelector(".modalGallery");
-            modalGallery.innerHTML = "";
-            fetchWorks().then(works => {
-                worksGenerationModal(works);
-            });
-
-            // Mise à jour de l'affichage dans la galerie principale
-            const projectsGallery = document.querySelector(".gallery");
-            projectsGallery.innerHTML = "";
-            fetchWorks().then(works => {
-                worksGeneration(works);
-            });
+            updateGalleries();
+            
         }
     } catch (error) {
         console.error("Erreur lors de la requête de suppression :", error);
     }
+}
+
+/**
+ * Cette fonction permet la mise à jour des galeries
+ */
+function updateGalleries() {
+    // Mise à jour de l'affichage dans la modale
+    const modalGallery = document.querySelector(".modalGallery");
+    modalGallery.innerHTML = "";
+    fetchWorks().then(works => {
+        worksGenerationModal(works);
+    });
+
+    // Mise à jour de l'affichage dans la galerie principale
+    const projectsGallery = document.querySelector(".gallery");
+    projectsGallery.innerHTML = "";
+    fetchWorks().then(works => {
+        worksGeneration(works);
+    });
 }

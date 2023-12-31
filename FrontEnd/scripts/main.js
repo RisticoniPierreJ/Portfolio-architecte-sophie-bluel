@@ -1,8 +1,8 @@
-//Gestion du clic sur le bouton envoyer
-// const form = document.querySelector("form");
-// form.addEventListener("submit", (event) => {
-//     event.preventDefault();
-// })
+//Gestion du clic sur le bouton envoyer du formulaire de contact
+const contactForm = document.querySelector("#contact form");
+contactForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+})
 
 /**
  * Cette fonction récupère les projets depuis l'API
@@ -12,7 +12,6 @@ async function fetchWorks() {
     const response = await fetch('http://localhost:5678/api/works');
     const works = await response.json();
     return works;
-    
 }
 
 /**
@@ -20,28 +19,46 @@ async function fetchWorks() {
  * @param {Array} works - Les projets à afficher
  */
 function worksGeneration(works) {
+    // V2
+    const divGallery = document.querySelector(".gallery");
+    let htmlString = "";
+
     for (let i = 0; i < works.length; i++) {
+        // // V1
+        // const project = works[i];
+
+        // // Récupération de l'élément du DOM qui accueillera les fiches projet
+        // const divGallery = document.querySelector(".gallery");
+
+        // // Création d’une balise dédiée à une fiche projet
+        // const projectFigure = document.createElement("figure");
+        // projectFigure.dataset.id = project.id;
+        // divGallery.appendChild(projectFigure);
+
+        // // Création des balises contenues dans la balise figure
+        // const imageProject = document.createElement("img");
+        // imageProject.src = project.imageUrl;
+        // imageProject.alt = project.title;
+        // projectFigure.appendChild(imageProject);
+
+        // const descriptionProject = document.createElement("figcaption");
+        // descriptionProject.innerText = `${project.title}`;
+        // projectFigure.appendChild(descriptionProject);
+
+        //V2
         const project = works[i];
-        // Récupération de l'élément du DOM qui accueillera les fiches projet
-        const divGallery = document.querySelector(".gallery");
-
-        // Création d’une balise dédiée à une fiche projet
-        const projectFigure = document.createElement("figure");
-        projectFigure.dataset.id = project.id;
-        divGallery.appendChild(projectFigure);
-
-        // Création des balises contenues dans la balise figure
-        const imageProject = document.createElement("img");
-        imageProject.src = project.imageUrl;
-        imageProject.alt = project.title;
-        projectFigure.appendChild(imageProject);
-
-        const descriptionProject = document.createElement("figcaption");
-        descriptionProject.innerText = `${project.title}`;
-        projectFigure.appendChild(descriptionProject);
+        htmlString += `
+            <figure data-id="${project.id}">
+                <img src="${project.imageUrl}" alt="${project.title}">
+                <figcaption>${project.title}</figcaption>
+            </figure>
+        `;
     };
-};
 
+    //V2
+    divGallery.innerHTML = htmlString;
+
+};
 fetchWorks().then(works => {
     worksGeneration(works);
 });
@@ -114,15 +131,27 @@ function filterProject (works){
     const filterBtn = document.querySelectorAll(".filterBtn");
 
     for (let i = 0; i < filterBtn.length; i++) {
-        filterBtn[i].addEventListener("click", function(){
+        filterBtn[i].addEventListener("click", () => {
+            // V1
+            // let projectFilter = works.filter(function(works){
+            //     return works.categoryId === i;
+            // })
 
-            let projectFilter = works.filter(function(works){
-                return works.categoryId === i;
-            })
+            // if (i === 0){
+            //     projectFilter = works;
+            // } ;
 
-            if (i === 0){
+            // document.querySelector(".gallery").innerHTML = "";
+            // worksGeneration(projectFilter);
+
+            // V2
+            let projectFilter;
+
+            if (i === 0) {
                 projectFilter = works;
-            } ;
+            } else {
+                projectFilter = works.filter(project => project.categoryId === i);
+            }
 
             document.querySelector(".gallery").innerHTML = "";
             worksGeneration(projectFilter);
@@ -164,13 +193,6 @@ window.onload = () => {
  * Cette Modifie des éléments du DOM si l'utilisateur est connecté
  */
 function updatePageForLoggedInUser() {
-
-    // if (loginButton) {
-    //     // Change le texte du bouton de "login" à "logout"
-    //     // loginButton.textContent = "logout";
-    //     // Ajoute le bouton modifier à coté du titre de la section portfolio
-    // }
-
     // Change le texte du bouton de "login" à "logout"
     const loginButton = document.querySelector("nav li.loginBtn");
     loginButton.textContent = "logout";
