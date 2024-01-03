@@ -169,26 +169,6 @@ loginBtn.addEventListener("click", () => {
     window.location.href = 'login.html';
 })
 
-
-//Gestion de la page au chargement après login
-window.onload = () => {
-    //Gestion de la modifitacation de la page d'accueil quand l'utilisateur est connecté
-    const isLoggedIn = localStorage.getItem('isLoggedIn');
-
-    if (isLoggedIn === 'true') {
-        // Fonction qui modifie le contenu de la page
-        updatePageForLoggedInUser();
-        // Fonction qui permet l'affichage de la modale
-        initAddEventListenermodal();
-
-        // Appel de la fonction gère la déconnection de l'utilisateur 
-        const logOut = document.querySelector(".logoutBtn");
-        logOut.addEventListener("click", () => {
-            handleLogout()
-        });
-    }
-};
-
 /**
  * Cette Modifie des éléments du DOM si l'utilisateur est connecté
  */
@@ -222,3 +202,22 @@ function handleLogout(){
     localStorage.setItem('isLoggedIn', 'false');
     window.location.href = 'index.html';
 }
+
+ //Gestion de la page au chargement après login
+ window.onload = () => {
+     //Gestion de la modifitacation de la page d'accueil quand l'utilisateur est connecté
+     const isLoggedIn = localStorage.getItem('isLoggedIn');
+ 
+     if (isLoggedIn === 'true') {
+         // Fonction qui modifie le contenu de la page
+         updatePageForLoggedInUser();
+         // Fonction qui permet l'affichage de la modale
+         initAddEventListenermodal();
+ 
+         // Appel de la fonction gère la déconnection de l'utilisateur 
+         const logOut = document.querySelector(".logoutBtn");
+         logOut.addEventListener("click", () => {
+             handleLogout()
+         });
+     }
+ };

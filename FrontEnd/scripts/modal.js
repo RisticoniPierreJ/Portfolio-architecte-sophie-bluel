@@ -26,15 +26,14 @@ function initAddEventListenermodal() {
     const modifyBtn = document.querySelector(".modifyProject");
     const modalBackground = document.querySelector(".modalBackground")
     modifyBtn.addEventListener("click", () => {
-        // Quand on a cliqué sur le bouton partagé, on affiche la popup
+        // Quand on a cliqué sur le bouton modifier, on affiche la popup
         displayModal();
     })
 
     modalBackground.addEventListener("click", (event) => {
-        // Si on a cliqué précisément sur la modalBackground 
-        // (et pas un autre élément qui se trouve dedant)
+        // on cache la popup si on a cliqué précisément sur la modalBackground 
+        // et pas sur un autre élément qui se trouve dedant)
         if (event.target === modalBackground) {
-            // Alors on cache la popup
             hideModal();
         }
     })
@@ -171,7 +170,7 @@ function validFileType(curFiles) {
 }
 
 /**
- * Cette fonction place les catégories comme options dans l'input select
+ * Cette fonction place les catégories tirées de l'API comme options dans l'input select
  * @param {Array} categories
  */
 function categoriesSelection(categories){
@@ -250,7 +249,7 @@ function resetForm() {
 /**
  * Cette fonction gère la création d'un projet
  */
-async function handleCreateProject(){
+async function handleCreateProject(event){
     const newProjectData = new FormData();
     newProjectData.append("image", input.files[0], input.files[0].name);
     newProjectData.append("title", event.target.querySelector("[name=title]").value);
@@ -283,7 +282,7 @@ async function handleCreateProject(){
 const form = document.querySelector(".modalform form");
 form.addEventListener("submit", async(event) => {
     event.preventDefault();
-    handleCreateProject();
+    handleCreateProject(event);
 });
 
 /**
