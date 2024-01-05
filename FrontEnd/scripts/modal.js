@@ -26,13 +26,13 @@ function initAddEventListenermodal() {
     const modifyBtn = document.querySelector(".modifyProject");
     const modalBackground = document.querySelector(".modalBackground")
     modifyBtn.addEventListener("click", () => {
-        // Quand on a cliqué sur le bouton modifier, on affiche la popup
+        // Au clique sur le bouton modifier, on affiche la popup
         displayModal();
     })
 
     modalBackground.addEventListener("click", (event) => {
         // on cache la popup si on a cliqué précisément sur la modalBackground 
-        // et pas sur un autre élément qui se trouve dedant)
+        // et pas sur un autre élément qui se trouve dedant
         if (event.target === modalBackground) {
             hideModal();
         }
@@ -40,6 +40,7 @@ function initAddEventListenermodal() {
 
     const modalCrossIcon = document.querySelector("#modalCrossIcon");
     modalCrossIcon.addEventListener("click", () => {
+        // Au clique sur l'icone "croix", on cache la popup
         hideModal();
     })
 }
@@ -98,6 +99,9 @@ const modalArrowIcon  = document.querySelector("#modalArrowIcon");
 const firstModal = document.querySelector(".firstModal");
 const secondModal = document.querySelector(".secondModal");
 
+/**
+ * Cette fonction affiche la première modale 
+**/
 function displayFirstModal(){
     firstModal.style.display = "flex";
     secondModal.style.display = "none";
@@ -105,6 +109,9 @@ function displayFirstModal(){
     modalTop.style.justifyContent = "flex-end";
 }
 
+/**
+ * Cette fonction affiche la seconde modale 
+**/
 function displaySecondModal(){
     firstModal.style.display = "none";
     secondModal.style.display = "block";
@@ -279,6 +286,7 @@ async function handleCreateProject(event){
     }
 }
 
+// Récuperation du formulaire et mise en place de l'écouteur sur ce dernier
 const form = document.querySelector(".modalform form");
 form.addEventListener("submit", async(event) => {
     event.preventDefault();

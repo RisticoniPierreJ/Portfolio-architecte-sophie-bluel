@@ -65,7 +65,7 @@ fetchWorks().then(works => {
 
 /**
  * Cette fonction récupère les catégories depuis l'API
- * @returns {Promise<Array>} - Une promesse contenant les projets
+ * @returns {Promise<Array>} - Une promesse contenant les catégories
  */
 async function fetchCategories() {
     const response = await fetch('http://localhost:5678/api/categories');
@@ -75,7 +75,7 @@ async function fetchCategories() {
 
 /**
  * Cette fonction gére les bouttons de filtre
- * @param {Array} categories - Les projets à afficher
+ * @param {Array} categories - Les catégories à afficher
  */
 function handleFilterBtn(categories) {
     // Récupération de l'élément du DOM qui accueillera les boutons de filtre
@@ -115,6 +115,7 @@ function handleFilterBtn(categories) {
                 button.classList.remove("active");
             })
 
+            // changement du style du bouton actif
             filterBtn[i].classList.add("active");
         })
     }
@@ -179,13 +180,7 @@ function updatePageForLoggedInUser() {
     loginButton.classList.replace("loginBtn", "logoutBtn")
 
      // Ajoute modifier, et un icon à côté du titre de la section portfolio
-    const projectTitle = document.querySelector(".pojectTitle");
-    projectTitle.innerHTML += `
-        <div class="modifyProject">
-            <i class="fa-regular fa-pen-to-square"></i>
-            <p></i>modifier</p>
-        </div>
-    `;
+     const modifyProjectBtn = document.querySelector(".modifyProject").style.display = "flex";
 
      // Ajout de la Top bar noire 
      const adminBlackTop = document.querySelector(".adminTop").style.display = "flex";
@@ -201,6 +196,7 @@ function handleLogout(){
     localStorage.setItem('userToken', '');
     localStorage.setItem('isLoggedIn', 'false');
     window.location.href = 'index.html';
+    const modifyProjectBtn = document.querySelector(".modifyProject").style.display = "none";
 }
 
  //Gestion de la page au chargement après login
@@ -214,10 +210,10 @@ function handleLogout(){
          // Fonction qui permet l'affichage de la modale
          initAddEventListenermodal();
  
-         // Appel de la fonction gère la déconnection de l'utilisateur 
+         // Appel de la fonction qui gère la déconnection de l'utilisateur 
          const logOut = document.querySelector(".logoutBtn");
          logOut.addEventListener("click", () => {
-             handleLogout()
+             handleLogout();
          });
      }
  };

@@ -352,6 +352,7 @@ a{
 /* Bouton modifier */
 .modifyProject{
 	display: flex;
+	display: none;
 	gap: 10px;
 	cursor: pointer;
 }
