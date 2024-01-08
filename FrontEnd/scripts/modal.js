@@ -7,14 +7,14 @@
  * Cette fonction affiche la modale  
  */
 function displayModal() {
-    const modalBackground = document.querySelector(".modalBackground").style.display = "block";
+    document.querySelector(".modalBackground").style.display = "block";
 }
 
 /**
  * Cette fonction cache la modale et réinitialise le formulaire
  */
 function hideModal() {
-    const modalBackground = document.querySelector(".modalBackground").style.display = "none";
+    document.querySelector(".modalBackground").style.display = "none";
     resetForm();
     displayFirstModal();
 }
@@ -87,9 +87,9 @@ function worksGenerationModal(works) {
         });
     };
 };
-fetchWorks().then(works => {
-    worksGenerationModal(works);
-});
+
+// MAJ des galeries
+updateGalleries();
 
 /**
  * Gestion du changement d'apparence de la modale
@@ -150,8 +150,8 @@ function updateImageDisplay() {
             image.src = URL.createObjectURL(file);
             image.alt = image.title = file.name;
             preview.appendChild(image);
-            const photoPreview = document.querySelector(".photoPreview").style.display="block";
-            const photoInputFile = document.querySelector(".photoInputFile").style.display="none";
+            document.querySelector(".photoPreview").style.display="block";
+            document.querySelector(".photoInputFile").style.display="none";
         } else {
             const para = document.createElement("p");
             para.textContent = `Ce type de fichier n'est pas valide.`;
@@ -236,8 +236,8 @@ function checkFormFields() {
 function resetForm() {
     // Réinitialise le champ de fichier (input de type "file")
     input.value="";
-    const photoInputFile = document.querySelector(".photoInputFile").style.display="flex";
-    const photoPreview = document.querySelector(".photoPreview").style.display="none";
+    document.querySelector(".photoInputFile").style.display="flex";
+    document.querySelector(".photoPreview").style.display="none";
 
     // Réinitialise la valeur des champs texte et select
     titleInput.value = "";
@@ -322,17 +322,14 @@ async function handleDeleteProject(projectId) {
  * Cette fonction permet la mise à jour des galeries
  */
 function updateGalleries() {
-    // Mise à jour de l'affichage dans la modale
-    const modalGallery = document.querySelector(".modalGallery");
-    modalGallery.innerHTML = "";
     fetchWorks().then(works => {
-        worksGenerationModal(works);
-    });
+        const modalGallery = document.querySelector(".modalGallery");
+        const projectsGallery = document.querySelector(".gallery");
 
-    // Mise à jour de l'affichage dans la galerie principale
-    const projectsGallery = document.querySelector(".gallery");
-    projectsGallery.innerHTML = "";
-    fetchWorks().then(works => {
+        modalGallery.innerHTML = "";
+        worksGenerationModal(works);
+
+        projectsGallery.innerHTML = "";
         worksGeneration(works);
     });
 }

@@ -19,33 +19,10 @@ async function fetchWorks() {
  * @param {Array} works - Les projets à afficher
  */
 function worksGeneration(works) {
-    // V2
     const divGallery = document.querySelector(".gallery");
     let htmlString = "";
 
     for (let i = 0; i < works.length; i++) {
-        // // V1
-        // const project = works[i];
-
-        // // Récupération de l'élément du DOM qui accueillera les fiches projet
-        // const divGallery = document.querySelector(".gallery");
-
-        // // Création d’une balise dédiée à une fiche projet
-        // const projectFigure = document.createElement("figure");
-        // projectFigure.dataset.id = project.id;
-        // divGallery.appendChild(projectFigure);
-
-        // // Création des balises contenues dans la balise figure
-        // const imageProject = document.createElement("img");
-        // imageProject.src = project.imageUrl;
-        // imageProject.alt = project.title;
-        // projectFigure.appendChild(imageProject);
-
-        // const descriptionProject = document.createElement("figcaption");
-        // descriptionProject.innerText = `${project.title}`;
-        // projectFigure.appendChild(descriptionProject);
-
-        //V2
         const project = works[i];
         htmlString += `
             <figure data-id="${project.id}">
@@ -54,14 +31,8 @@ function worksGeneration(works) {
             </figure>
         `;
     };
-
-    //V2
     divGallery.innerHTML = htmlString;
-
 };
-fetchWorks().then(works => {
-    worksGeneration(works);
-});
 
 /**
  * Cette fonction récupère les catégories depuis l'API
@@ -95,6 +66,7 @@ function handleFilterBtn(categories) {
         const filterBtn = document.createElement("button");
         filterBtn.classList= "filterBtn";
 
+        // Ici on ajuste la la taille des boutons filtre
         if(filter.name.length < 8){
             filterBtn.classList.add("filterBtnSmall");
         }else{
@@ -114,12 +86,10 @@ function handleFilterBtn(categories) {
             filterBtn.forEach(button => {
                 button.classList.remove("active");
             })
-
             // changement du style du bouton actif
             filterBtn[i].classList.add("active");
         })
     }
-
 };
 fetchCategories().then(categories => {
     handleFilterBtn(categories);
@@ -133,19 +103,6 @@ function filterProject (works){
 
     for (let i = 0; i < filterBtn.length; i++) {
         filterBtn[i].addEventListener("click", () => {
-            // V1
-            // let projectFilter = works.filter(function(works){
-            //     return works.categoryId === i;
-            // })
-
-            // if (i === 0){
-            //     projectFilter = works;
-            // } ;
-
-            // document.querySelector(".gallery").innerHTML = "";
-            // worksGeneration(projectFilter);
-
-            // V2
             let projectFilter;
 
             if (i === 0) {
@@ -160,9 +117,9 @@ function filterProject (works){
     };
 };
 fetchWorks().then(works => {
+    worksGeneration(works);
     filterProject(works);
 });
-
 
 //Gestion du clic sur le bouton login
 const loginBtn = document.querySelector(".loginBtn")
@@ -180,13 +137,13 @@ function updatePageForLoggedInUser() {
     loginButton.classList.replace("loginBtn", "logoutBtn")
 
      // Ajoute modifier, et un icon à côté du titre de la section portfolio
-     const modifyProjectBtn = document.querySelector(".modifyProject").style.display = "flex";
+     document.querySelector(".modifyProject").style.display = "flex";
 
      // Ajout de la Top bar noire 
-     const adminBlackTop = document.querySelector(".adminTop").style.display = "flex";
+     document.querySelector(".adminTop").style.display = "flex";
 
      // Suppression de la filter bar 
-     const filterBar = document.querySelector(".filter").style.display = "none";
+     document.querySelector(".filter").style.display = "none";
 }
 
 /**
@@ -196,7 +153,7 @@ function handleLogout(){
     localStorage.setItem('userToken', '');
     localStorage.setItem('isLoggedIn', 'false');
     window.location.href = 'index.html';
-    const modifyProjectBtn = document.querySelector(".modifyProject").style.display = "none";
+    document.querySelector(".modifyProject").style.display = "none";
 }
 
  //Gestion de la page au chargement après login

@@ -32,7 +32,7 @@ async function login(userCredentials) {
     });
 
     if (!response.ok) {
-        const errorMessage = document.querySelector(".errorMessage").style.display = "flex";
+        document.querySelector(".errorMessage").style.display = "flex";
     }
     return response.json();
 }
