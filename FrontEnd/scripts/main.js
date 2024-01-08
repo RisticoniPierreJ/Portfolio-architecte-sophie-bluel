@@ -56,6 +56,7 @@ function handleFilterBtn(categories) {
     const firstFilterBtn = document.createElement("button");
     firstFilterBtn.classList= "filterBtn filterBtnSmall active";
     firstFilterBtn.innerText = "Tous";
+    firstFilterBtn.dataset.id = 0;
     filterBar.appendChild(firstFilterBtn);
 
     // Génération des bouton de filtre à partir de l'API
@@ -65,8 +66,9 @@ function handleFilterBtn(categories) {
         // Création des balises contenues dans la balise filter
         const filterBtn = document.createElement("button");
         filterBtn.classList= "filterBtn";
+        filterBtn.dataset.id = filter.id;
 
-        // Ici on ajuste la la taille des boutons filtre
+        // Ajustement de la la taille des boutons filtre
         if(filter.name.length < 8){
             filterBtn.classList.add("filterBtnSmall");
         }else{
@@ -104,11 +106,12 @@ function filterProject (works){
     for (let i = 0; i < filterBtn.length; i++) {
         filterBtn[i].addEventListener("click", () => {
             let projectFilter;
+            let categoryId = parseInt(filterBtn[i].dataset.id);
 
-            if (i === 0) {
+            if (categoryId === 0) {
                 projectFilter = works;
             } else {
-                projectFilter = works.filter(project => project.categoryId === i);
+                projectFilter = works.filter(project => project.categoryId === categoryId);
             }
 
             document.querySelector(".gallery").innerHTML = "";
@@ -116,6 +119,7 @@ function filterProject (works){
         });       
     };
 };
+
 fetchWorks().then(works => {
     worksGeneration(works);
     filterProject(works);
